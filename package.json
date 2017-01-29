@@ -1,0 +1,19 @@
+{
+    "name": "smartKeyboard",
+    "version": "0.0.1",
+    "main": "main.js",
+    "productName": "Smart Keyboard App",
+    "description": "fully customisable keyboard",
+    "rebuild": "npm rebuild --runtime=electron --target=1.4.15 --disturl=https://atom.io/download/atom-shell --abi=48",
+
+    "dependencies": {
+        "express": "^4.10.2",
+        "httpdispatcher": "^2.0.1",
+        "robotjs": "^0.4.5",
+        "socket.io": "^1.7.2"
+    },
+    "devDependencies": {
+        "electron": "^1.4.15",
+        "electron-rebuild": "^1.5.7"
+    }
+}

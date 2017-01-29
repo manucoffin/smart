@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Smart Keyboard Server</title>
+    </head>
+    <body>
+
+        <h1>Smart Keyboard is running !</h1>
+        <p>Now open a browser on your phone for example and type in this address : </p>
+        <h2 id="ip-address"></h2>
+
+
+
+        <script>
+
+            var os = require('os');
+            var ifaces = os.networkInterfaces();
+            var localIp;
+
+            Object.keys(ifaces).forEach(function (ifname) {
+                var alias = 0;
+
+                ifaces[ifname].forEach(function (iface) {
+                    if ('IPv4' !== iface.family || iface.internal !== false) {
+                        // skip over internal (i.e. 127.0.0.1) and non-ipv4 addresses
+                        return;
+                    }
+
+                    if (alias >= 1) {
+                        // this single interface has multiple ipv4 addresses
+                        localIp = iface.address;
+                    } else {
+                        // this interface has only one ipv4 adress
+                        localIp = iface.address;
+                    }
+                    ++alias;
+                });
+            });
+            
+            document.getElementById('ip-address').innerHTML = localIp;
+        </script>
+    </body>
+</html>
