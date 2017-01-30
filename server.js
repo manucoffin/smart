@@ -1,16 +1,18 @@
-var express = require('express')();
-var http = require('http').Server(express);
+var express = require('express');  
+var app = express();  
+var http = require('http').createServer(app);  
 var io = require('socket.io')(http);
 var robot = require("robotjs");
 
+app.use(express.static(__dirname + '/resources')); 
 
-express.get('/', function (req, res) {
+app.get('/', function (req, res) {
     res.sendFile(__dirname+'/index.html');
 });
 
 
-express.get('/keyboards/1.html', function (req, res) {
-    res.sendFile(__dirname+'/keyboards/1.html');
+app.get('/keyboards/1.html', function (req, res) {
+    res.sendFile(__dirname+'/resources/views/keyboards/1/1.html');
 });
 
 
@@ -21,8 +23,19 @@ io.on('connection', function (socket) {
         console.log('user disconnected');
     });
 
-    socket.on('key', function (msg) {
-        robot.keyTap(msg);
+    socket.on('keyPress', function (keyObj) {
+        if(keyObj.type == "key")
+        {
+            robot.keyTap(keyObj.value);
+        }
+        else if(keyObj.type == "string")
+        {
+
+        }
+        else if(keyObj.type == "macro")
+        {
+
+        }
     });
     
     socket.on('macro', function (msg) {
@@ -39,4 +52,6 @@ io.on('connection', function (socket) {
     });
 });
 
-http.listen(3000);
+http.listen(3000, function () {
+    console.log('Example app listening on port 3000!')
+})

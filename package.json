@@ -4,7 +4,6 @@
     "main": "main.js",
     "productName": "Smart Keyboard App",
     "description": "fully customisable keyboard",
-    "rebuild": "npm rebuild --runtime=electron --target=1.4.15 --disturl=https://atom.io/download/atom-shell --abi=48",
 
     "dependencies": {
         "express": "^4.10.2",
