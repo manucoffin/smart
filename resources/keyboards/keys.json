@@ -1,0 +1,50 @@
+{
+    "keyboard":{
+        "type": "dynamic",
+        "width": "300",
+        "height": "300"
+    },
+    
+    "keys": {
+        "audio_prev": {
+            "value": "audio_prev",
+            "type": "key"
+        },
+
+        "audio_next": {
+            "value": "audio_next",
+            "type": "key"
+        },
+
+        "audio_play": {
+            "value": "audio_play",
+            "type": "key"
+        },
+
+        "audio_pause": {
+            "value": "audio_pause",
+            "type": "key"
+        },
+
+        "audio_vol_up": {
+            "value": "audio_vol_up",
+            "type": "key"
+        },
+
+        "audio_vol_down": {
+            "value": "audio_vol_down",
+            "type": "key"
+        },
+
+        "azerty": {
+            "value": "azerty",
+            "type": "string"
+        },
+
+        "maj_a": {
+            "value": "a",
+            "type": "macro",
+            "modifiers": [ "shift" ]
+        }
+    }
+}

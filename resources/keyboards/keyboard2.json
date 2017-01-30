@@ -1,0 +1,14 @@
+{
+    "keyboard":{
+        "type": "dynamic",
+        "width": "300",
+        "height": "300"
+    },
+    
+    "keys": {
+        "audio_prev": {
+            "value": "audio_prev",
+            "type": "key"
+        }
+    }
+}

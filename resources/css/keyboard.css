@@ -4,16 +4,20 @@
     box-sizing: border-box;
 }
 
-.container{
+#keyboard{
     display: flex;
-    padding: 0 5vh 0 5vh;
-    height: 50vh;
+    flex-wrap: wrap;
+    margin: -10px 0 0 -10px;
 }
 
-.key, .macro{
-    flex: auto;
-    width: 100px;
-    height: 100%;
+.key{
+    display: inline-block;
+    margin:10px 0 0 2%;
+    flex-grow: 1;
+    height:100px;
+    width: calc(100% * (1/3) - 10px - 1px);
+
+
     line-height: 100px;
     box-sizing: border-box;
     text-align: center;
@@ -22,16 +26,16 @@
     border-radius: 3px;
 }
 
-.container:nth-child(odd) .key:nth-child(odd){
+#keyboard:nth-child(odd) .key:nth-child(odd){
     background-color: bisque;
 }
-.container:nth-child(odd) .key:nth-child(even){
+#keyboard:nth-child(odd) .key:nth-child(even){
     background-color: aquamarine;
 }
 
-.container:nth-child(even) .key:nth-child(odd){
+#keyboard:nth-child(even) .key:nth-child(odd){
     background-color:aquamarine;
 }
-.container:nth-child(even) .key:nth-child(even){
+#keyboard:nth-child(even) .key:nth-child(even){
     background-color:bisque;
 }

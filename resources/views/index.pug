@@ -1,0 +1,14 @@
+html  
+    head
+        title= title
+        script.
+            var title = '#{keyboards}';
+            console.log(title);
+            
+    body
+        h1= title
+        
+        - for (var x = 0; x < keyboards.length; x++)
+            li
+                a(href='/keyboard/' + keyboards[x]) #{keyboards[x]}
+        

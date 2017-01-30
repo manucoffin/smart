@@ -1,0 +1,18 @@
+html  
+    head
+        title= keyboardName
+        
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.2/socket.io.min.js')
+        script.
+            // make the pug variable accessible in the next script
+            var keyboardName = '#{keyboardName}';
+        script(src='../js/keyboard.js')
+        
+        link(href='../css/keyboard.css', rel='stylesheet')
+            
+            
+    body
+        h1= keyboardName
+        
+        div(id='keyboard')
+        

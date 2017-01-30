@@ -1,19 +1,42 @@
-var express = require('express');  
-var app = express();  
-var http = require('http').createServer(app);  
-var io = require('socket.io')(http);
-var robot = require("robotjs");
+const express = require('express');  
+const app = express();  
+const http = require('http').createServer(app);  
+const io = require('socket.io')(http);
+const robot = require("robotjs");
+const fs = require('fs');
 
-app.use(express.static(__dirname + '/resources')); 
+app.set('views', __dirname + '/resources/views');
+app.set('view engine', 'pug');
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname+'/index.html');
-});
+const keyboardsFolder = './resources/keyboards/';
+app.use(express.static(__dirname + '/resources'));
 
 
-app.get('/keyboards/1.html', function (req, res) {
-    res.sendFile(__dirname+'/resources/views/keyboards/1/1.html');
-});
+let keyboardFiles = fs.readdirSync(keyboardsFolder);
+let keyboardNames = [];
+
+
+for(var k of keyboardFiles){
+    // remove the extension .json
+    let keyboard = k.split('.');
+    keyboard = keyboard[0];
+    keyboardNames.push(keyboard);
+    
+    // Define routes when a keyboard is passed as a parameter
+    app.get('/keyboard/:keyboard', function (req, res) {  
+        res.render(
+            'keyboard',
+            { keyboardName: req.params.keyboard})
+    })
+}
+
+
+app.get('/', function (req, res) {  
+    res.render(
+        'index',
+        { title: 'Choose a keyboard', keyboards: keyboardNames})
+})
+
 
 
 
@@ -30,25 +53,12 @@ io.on('connection', function (socket) {
         }
         else if(keyObj.type == "string")
         {
-
+            robot.typeString(keyObj.value);
         }
         else if(keyObj.type == "macro")
         {
-
+            robot.keyTap(keyObj.value, keyObj.modifiers);
         }
-    });
-    
-    socket.on('macro', function (msg) {
-        var keys = msg.split('_');
-//        keys.forEach(function (key) {
-//           robot.keyToggle(key, 'down');
-//        });
-//        robot.keyTap(keys[1], keys[0]);
-        robot.keyTap(msg);
-    });
-    
-    socket.on('mouse', function (msg){      
-//        robot.mouseClick(left, true)
     });
 });
 
